@@ -6,9 +6,9 @@ export async function GET(req: Request, context: any) {
   await dbConnect();
 
   try {
-    const { id } = await context.params; // ← حل المشكلة
+    const { id } = await context.params;
 
-    const craftsman = await Craftsman.findById(id)
+    const craftsman: any = await Craftsman.findById(id)
       .populate("userId", "name email phone role")
       .lean();
 
