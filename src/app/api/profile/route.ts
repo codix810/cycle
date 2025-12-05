@@ -11,6 +11,7 @@ export async function GET() {
   try {
     console.log("=== PROFILE API START ===");
 
+    // قراءة الكوكيز من الهيدر
     const headerList = await headers();
     const cookieHeader = headerList.get("cookie") || "";
 
@@ -19,10 +20,7 @@ export async function GET() {
 
     for (const c of cookiesArr) {
       const [key, value] = c.trim().split("=");
-
-      if (key === "token") {
-        token = value;
-      }
+      if (key === "token") token = value;
     }
 
     console.log("TOKEN:", token);
@@ -34,6 +32,7 @@ export async function GET() {
       );
     }
 
+    // فك التوكن
     let decoded: any;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET!);
@@ -45,7 +44,8 @@ export async function GET() {
       );
     }
 
-    const user = await User.findById(decoded.id).lean();
+    // نجيب المستخدم
+    const user = (await User.findById(decoded.id).lean()) as any;
     console.log("USER FOUND:", user);
 
     if (!user) {
@@ -55,6 +55,7 @@ export async function GET() {
       );
     }
 
+    // لو المستخدم صنايعي → نجيب بيانات الصنايعي معه
     if (user.role === "craftsman") {
       const craftsman = await Craftsman.findOne({ userId: user._id }).lean();
       console.log("CRAFTSMAN:", craftsman);
@@ -66,6 +67,7 @@ export async function GET() {
       });
     }
 
+    // لو المستخدم عميل أو أدمن
     return NextResponse.json({
       role: user.role,
       user,
