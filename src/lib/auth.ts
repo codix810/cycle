@@ -1,6 +1,7 @@
+import { ReadonlyRequestCookies } from "next/headers";
 const jwt = require("jsonwebtoken");
 
-export function getUserRole(cookies) {
+export function getUserRole(cookies: ReadonlyRequestCookies) {
   try {
     const token = cookies.get("token")?.value;
 
