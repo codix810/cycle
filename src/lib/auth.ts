@@ -1,7 +1,7 @@
-import { ReadonlyRequestCookies } from "next/headers";
+import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
 const jwt = require("jsonwebtoken");
 
-export function getUserRole(cookies: ReadonlyRequestCookies) {
+export function getUserRole(cookies: RequestCookies) {
   try {
     const token = cookies.get("token")?.value;
 
