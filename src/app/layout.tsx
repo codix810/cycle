@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import font
+import {Cairo } from "next/font/google";
 import "./globals.css";
 import NavWrapper from "@/components/NavWrapper";
+import Footer from "@/components/layout/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+//font same as figma 
+const cairo = Cairo ({
+  subsets: ["arabic","latin"],
+  weight: ["400", "500", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Houda",
@@ -21,9 +20,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" >
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${cairo.className}  antialiased`}>
         <NavWrapper />
-        <div className="mt-20">{children}</div>
+        <div className="">{children}</div>
+        <Footer />
       </body>
     </html>
   );
