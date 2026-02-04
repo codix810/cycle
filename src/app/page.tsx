@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import Hero from "@/components/sections/Home/Hero";
+import Services from "@/components/sections/Home/Services";
+import Benefits from "@/components/sections/Home/Benefits";
+import HowItWorks from "@/components/sections/Home/HowItWorks";
+import TopWorkers from "@/components/sections/Home/TopWorkers";
+import Review from "@/components/sections/Home/Review";
+import JoinUs from "@/components/sections/Home/JoinUs";
 
 export default function HomePage() {
   const [role, setRole] = useState("guest");
@@ -21,6 +28,8 @@ useEffect(() => {
 
   fetchRole();
 }, []);
+
+
 
 
   const getPrimaryButton = () => {
@@ -68,8 +77,16 @@ useEffect(() => {
   };
 
   return (
-    <div className="pt-24 min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <motion.div
+    <div className=" min-h-screen bg-gradient-to-b from-blue-50 to-white">
+
+      <Hero />
+      <Services/>
+      <Benefits/>
+      <HowItWorks/>
+      <TopWorkers/>
+      <Review/>
+      <JoinUs/>
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center px-6"
@@ -80,9 +97,9 @@ useEffect(() => {
         </p>
 
         <div className="mt-8 flex justify-center gap-4">{getPrimaryButton()}</div>
-      </motion.div>
+      </motion.div> */}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-20 p-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-20 p-6">
         {[
           { title: "صنايعية محترفين", desc: "كل صنايعي لازم يتوافق عليه من الادمن قبل ما يشتغل." },
           { title: "صور وملف كامل", desc: "شوف شغل الصنايعي وصوره وخبرته بالكامل قبل ما تتعامل." },
@@ -99,7 +116,7 @@ useEffect(() => {
             <p className="text-gray-600">{f.desc}</p>
           </motion.div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
