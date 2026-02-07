@@ -1,16 +1,22 @@
+// lib/db.ts
 import mongoose from "mongoose";
 
-const MONGO_URI = process.env.MONGO_URI!;
+const MONGODB_URI = process.env.MONGO_URI!;
+
+if (!MONGODB_URI) {
+  throw new Error("MONGO_URI is not set in environment variables");
+}
 
 export async function dbConnect() {
-  if (mongoose.connection.readyState === 1) return;
+  if (mongoose.connection.readyState >= 1) return;
 
   try {
-    await mongoose.connect(MONGO_URI, {
+    await mongoose.connect(MONGODB_URI, {
       dbName: "houdaDB",
     });
-    console.log("✅ Connected to Local MongoDB");
+    console.log("✅ Connected to MongoDB");
   } catch (err) {
-    console.error("❌ Local MongoDB connection error:", err);
+    console.error("❌ MongoDB connection error:", err);
+    throw err;
   }
 }

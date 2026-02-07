@@ -1,29 +1,41 @@
 import type { Metadata } from "next";
-// import font
-import {Cairo } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import NavWrapper from "@/components/NavWrapper";
-import Footer from "@/components/layout/Footer";
+import Navbar from "./components/Navbar";
 
-//font same as figma 
-const cairo = Cairo ({
-  subsets: ["arabic","latin"],
-  weight: ["400", "500", "700"],
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Houda",
-  description: "Craftsmen Platform",
+  title: "clinic",
+  description: "حجزعياده طبيه متقدم",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" >
-      <body className={`${cairo.className}  antialiased`}>
-        <NavWrapper />
-        <div className="">{children}</div>
-        <Footer />
+    <html lang="ar" dir="rtl">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Navbar />
+        {children}
       </body>
     </html>
   );
